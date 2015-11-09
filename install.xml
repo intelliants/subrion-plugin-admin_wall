@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="admin_wall">
+	<title>Admin wall</title>
+	<summary>This plugin allows administrators to leave their messages/announcements at the Admin Panel</summary>
+	<author>Intelliants LLC</author>
+	<contributor>Intelliants LLC</contributor>
+	<version>3.2.0</version>
+	<date>2014-11-12</date>
+	<compatibility>3.2</compatibility>
+
+	<phrases>
+		<phrase category="admin" key="admin_wall">Admin Wall</phrase>
+		<phrase category="admin" key="sumbit_post">Submit</phrase>
+		<phrase category="admin" key="post_added">Post added</phrase>
+		<phrase category="admin" key="just_now">Just now</phrase>
+	</phrases>
+
+	<adminpages>
+		<page name="admin_wall" url="wall/">Admin Wall Posts</page>
+	</adminpages>
+
+	<hooks>
+		<hook name="bootstrap" type="php" page_type="admin" filename="plugins/admin_wall/includes/hook.bootstrap.php" pages="index"><![CDATA[]]></hook>
+		<hook name="smartyDashboardContentLeft" type="smarty" page_type="admin" filename="plugins/admin_wall/templates/admin/wall.tpl"><![CDATA[]]></hook>
+	</hooks>
+
+	<install>
+		<sql>
+			<![CDATA[
+CREATE TABLE `{prefix}admin_wall` (
+	`id` int(8) NOT NULL auto_increment,
+	`member_id` int(8) NOT NULL,
+	`body` text NOT NULL,
+	`date` datetime NOT NULL,
+	PRIMARY KEY  (`id`)
+) {mysql_version};
+			]]>
+		</sql>
+	</install>
+
+	<uninstall>
+		<sql>
+			<![CDATA[
+DROP TABLE IF EXISTS `{prefix}admin_wall`;
+			]]>
+		</sql>
+	</uninstall>
+</plugin>
