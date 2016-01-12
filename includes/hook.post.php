@@ -29,10 +29,6 @@ if (iaView::REQUEST_JSON == $iaView->getRequestType())
 		$error = true;
 		$messages[] = iaLanguage::get('error_empty_post');
 	}
-	else
-	{
-		$post['body'] = preg_replace('#(^|\s|\n)http(s)?\:\/\/([^\s^\n^\<^\>]+)(\s|\n|\<|\>|$)#i', '$1<a href="http$2://$3" target="_blank">http$2://$3</a>$4', $post['body']);
-	}
 
 	if (!$error)
 	{
@@ -57,9 +53,4 @@ if (iaView::REQUEST_JSON == $iaView->getRequestType())
 	$output['messages'] = $messages;
 
 	$iaView->assign($output);
-}
-
-if (iaView::REQUEST_HTML == $iaView->getRequestType())
-{
-	return iaView::errorPage(iaView::ERROR_NOT_FOUND);
 }
